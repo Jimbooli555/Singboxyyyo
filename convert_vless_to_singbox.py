@@ -1,25 +1,23 @@
-import base64
 import requests
 import json
 
-# لینک ساب VLESS
+# VLESS subscription link
 url = "https://raw.githubusercontent.com/mohamadfg-dev/telegram-v2ray-configs-collector/main/category/ws.txt"
 
-# دانلود ساب
+# Download subscription file (this file is plain text, not Base64)
 res = requests.get(url)
-data = base64.b64decode(res.text).decode("utf-8")
+data = res.text.strip()
 
-# استخراج تمام لینک‌های vless
+# Extract all vless links
 vless_links = [line for line in data.splitlines() if line.startswith("vless://")]
 
-# تبدیل به JSON Sing-box
+# Convert to Sing-box JSON (basic format for now)
 singbox_list = []
 for link in vless_links:
-    # فعلا فقط نام و لینک رو ذخیره میکنیم
     singbox_list.append({"vless": link})
 
-# ذخیره خروجی
-with open("singbox_sub.json", "w") as f:
-    json.dump(singbox_list, f, indent=2)
+# Save output
+with open("singbox_sub.json", "w", encoding="utf-8") as f:
+    json.dump(singbox_list, f, indent=2, ensure_ascii=False)
 
-print(f"تبدیل شد {len(vless_links)} لینک")
+print(f"Converted {len(vless_links)} links")
