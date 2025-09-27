@@ -3,7 +3,7 @@ import requests
 import json
 
 # لینک ساب VLESS
-url = "https://raw...لینک_ساب_تو_اینجا_بزار"
+url = "https://raw.githubusercontent.com/mohamadfg-dev/telegram-v2ray-configs-collector/main/category/ws.txt"
 
 # دانلود ساب
 res = requests.get(url)
